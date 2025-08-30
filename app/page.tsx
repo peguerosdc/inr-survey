@@ -66,6 +66,8 @@ export default function Home() {
     setData({ step: 1 });
   };
 
+  console.log(data);
+
   return (
     <div className="container px-4 sm:max-w-3xl sm:mx-auto py-10">
       {data.step === 1 && (

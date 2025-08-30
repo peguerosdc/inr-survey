@@ -10,40 +10,37 @@ export function useLocalStorage<T>(
   key: string,
   initialValue: T,
   loadingValue: T,
-  schema?: z.ZodSchema<T>
+  schema: z.ZodSchema<T>
 ): [T, (value: T | ((val: T) => T)) => void] {
   // State to store our value
   const [storedValue, setStoredValue] = useState<T>(loadingValue);
-  const [isInitialized, setIsInitialized] = useState(false);
 
   // Use ref to store initialValue to avoid dependency issues
   const initialValueRef = useRef(initialValue);
 
   // Initialize from localStorage on client side only
   useEffect(() => {
+    console.log("starging");
     try {
       const item = window.localStorage.getItem(key);
       if (item) {
         const parsedValue = JSON.parse(item);
 
-        // Validate with schema if provided
-        if (schema) {
-          const result = schema.safeParse(parsedValue);
-          if (result.success) {
-            setStoredValue(result.data);
-          } else {
-            // Invalid data - remove from localStorage and use initial value
-            console.warn(
-              `Invalid data in localStorage for key "${key}", removing:`,
-              result.error
-            );
-            window.localStorage.removeItem(key);
-            setStoredValue(initialValueRef.current);
-          }
+        const result = schema.safeParse(parsedValue);
+        if (result.success) {
+          console.log("result.data", result.data);
+          setStoredValue(result.data);
         } else {
-          // No schema validation, use parsed value as-is
-          setStoredValue(parsedValue);
+          // Invalid data - remove from localStorage and use initial value
+          console.warn(
+            `Invalid data in localStorage for key "${key}", removing:`,
+            result.error
+          );
+          window.localStorage.removeItem(key);
+          setStoredValue(initialValueRef.current);
         }
+      } else {
+        setStoredValue(initialValueRef.current);
       }
     } catch (error) {
       console.warn(`Error reading localStorage key "${key}":`, error);
@@ -57,8 +54,6 @@ export function useLocalStorage<T>(
         );
       }
       setStoredValue(initialValueRef.current);
-    } finally {
-      setIsInitialized(true);
     }
   }, [key, schema]);
 
@@ -81,7 +76,5 @@ export function useLocalStorage<T>(
     }
   };
 
-  // Don't return the stored value until we've initialized from localStorage
-  // This prevents hydration mismatches
-  return [isInitialized ? storedValue : initialValueRef.current, setValue];
+  return [storedValue, setValue];
 }
