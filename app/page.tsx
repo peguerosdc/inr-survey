@@ -64,10 +64,12 @@ export default function Home() {
 
   const handleWeekendSubmit = (weekend: WeekendFormSchema) => {
     setData({ ...data, weekend, step: data.step + 1 });
+    window.scrollTo(0, 0);
   };
 
   const handleReset = () => {
     setData({ step: 1 });
+    window.scrollTo(0, 0);
   };
 
   return (
