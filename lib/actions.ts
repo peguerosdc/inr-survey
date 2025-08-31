@@ -44,7 +44,6 @@ export async function saveSurveyResults(
 ) {
   try {
     await db.insert(results).values({
-      email: intro.email,
       gender: intro.gender,
       age: intro.age,
       one_hours: working.one.hours,

@@ -11,7 +11,6 @@ export const results = pgTable("results", {
   id: serial("id").primaryKey(),
   createdAt: timestamp("fecha_creacion").defaultNow().notNull(),
   // intro
-  email: text("email").notNull(),
   gender: text("genero").notNull(),
   age: integer("edad").notNull(),
   // working
