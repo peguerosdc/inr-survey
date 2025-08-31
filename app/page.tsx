@@ -40,7 +40,10 @@ export default function Home() {
     },
     schema
   );
-  const onBack = () => setData({ ...data, step: data.step - 1 });
+  const onBack = () => {
+    setData({ ...data, step: data.step - 1 });
+    window.scrollTo(0, 0);
+  };
 
   const handleIntroSubmit = (intro: IntroSchema) => {
     setData({ ...data, intro, step: data.step + 1 });
@@ -56,6 +59,7 @@ export default function Home() {
       working,
       step: data.step + 1,
     });
+    window.scrollTo(0, 0);
   };
 
   const handleWeekendSubmit = (weekend: WeekendFormSchema) => {
@@ -65,8 +69,6 @@ export default function Home() {
   const handleReset = () => {
     setData({ step: 1 });
   };
-
-  console.log(data);
 
   return (
     <div className="container px-4 sm:max-w-3xl sm:mx-auto py-10">
@@ -96,8 +98,9 @@ export default function Home() {
           <FormFooter step={data.step} onBack={onBack} />
         </WeekendFormForm>
       )}
-      {data.step === 5 && data.working && data.weekend && (
+      {data.step === 5 && data.working && data.weekend && data.intro && (
         <FormResults
+          email={data.intro.email}
           working={data.working}
           weekend={data.weekend}
           onReset={handleReset}

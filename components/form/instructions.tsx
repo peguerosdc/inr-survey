@@ -7,7 +7,7 @@ export function InstructionsForm({
 }) {
   return (
     <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
-      <h2>Instrucciones</h2>
+      <h2 className="text-2xl font-bold">Instrucciones</h2>
       <p>
         A continuación encontrará diversas preguntas sobre hábitos sedentarios
         que se realizan ENTRE SEMANA y FIN DE SEMANA. Reporte el tiempo

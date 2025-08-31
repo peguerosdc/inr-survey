@@ -20,7 +20,6 @@ export function useLocalStorage<T>(
 
   // Initialize from localStorage on client side only
   useEffect(() => {
-    console.log("starging");
     try {
       const item = window.localStorage.getItem(key);
       if (item) {
@@ -28,7 +27,6 @@ export function useLocalStorage<T>(
 
         const result = schema.safeParse(parsedValue);
         if (result.success) {
-          console.log("result.data", result.data);
           setStoredValue(result.data);
         } else {
           // Invalid data - remove from localStorage and use initial value

@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 
 interface FormFooterProps {
@@ -7,7 +8,12 @@ interface FormFooterProps {
 
 export function FormFooter({ step, onBack }: FormFooterProps) {
   return (
-    <div className="w-full flex justify-between">
+    <div
+      className={cn(
+        "w-full flex justify-between",
+        step === 1 && "flex-row-reverse"
+      )}
+    >
       {step > 1 && (
         <Button type="button" variant="outline" onClick={onBack}>
           Anterior
