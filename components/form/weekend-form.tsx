@@ -51,7 +51,7 @@ export function WeekendFormForm({
         className="space-y-8 w-full"
       >
         <h1 className="text-2xl font-bold">
-          En un típico DIA de FIN DE SEMANA, ¿cuánto tiempo pasó sentado o
+          En un típico DÍA de FIN DE SEMANA, ¿cuánto tiempo pasó sentado o
           recostado y...
         </h1>
         <div className="space-y-6">

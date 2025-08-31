@@ -22,7 +22,7 @@ export function computeAverageHours(
         weekend.six.hours +
         weekend.seven.hours +
         weekend.eight.hours) +
-    5 *
+    2 *
       (weekend.five.minutes +
         weekend.six.minutes +
         weekend.seven.minutes +

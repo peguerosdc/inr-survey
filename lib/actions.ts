@@ -20,10 +20,10 @@ export async function sendSurveyResultsEmail(email: string, total: number) {
       subject: "Resultados de tu Encuesta INR",
       text: `El tiempo promedio al día en conductas sedentarias es: ${total.toFixed(
         2
-      )} h/dia`,
+      )} h/día`,
       html: `El tiempo promedio al día en conductas sedentarias es: <b>${total.toFixed(
         2
-      )} h/dia</b>`,
+      )} h/día</b>`,
     });
     console.log(info);
 

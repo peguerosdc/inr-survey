@@ -48,14 +48,14 @@ export function WorkingFormForm({
         className="space-y-8 w-full"
       >
         <h1 className="text-2xl font-bold">
-          En un típico DIA LABORABLE de la semana pasada, ¿cuánto tiempo pasó
+          En un típico DÍA LABORABLE de la semana pasada, ¿cuánto tiempo pasó
           sentado o recostado y...
         </h1>
         <div className="space-y-6">
           <div>
             <h3 className="font-medium mb-4">
               1. Viendo la televisión o utilizando la computadora, tablet,
-              teléfono celular o videojuegos en su tiempo libr. <br />
+              teléfono celular o videojuegos en su tiempo libre. <br />
               Cuente el tiempo que pasó mirando televisión, videos, DVDs,
               jugando video juegos o en redes sociales.
             </h3>

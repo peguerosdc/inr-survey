@@ -54,7 +54,7 @@ export function FormResults({
     <div className="container px-4 sm:max-w-3xl sm:mx-auto py-10 flex flex-col">
       <div className="flex flex-col gap-4 text-center">
         <p>El tiempo promedio al día en conductas sedentarias es:</p>
-        <p className="text-2xl font-bold">{total.toFixed(2)} h/dia</p>
+        <p className="text-2xl font-bold">{total.toFixed(2)} h/día</p>
         <p>
           Ubica en que nivel del semáforo mostrado en el cartel te encuentras
         </p>
