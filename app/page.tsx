@@ -19,6 +19,7 @@ import { FormResults } from "@/components/form/results";
 import { FormFooter } from "@/components/form/footer";
 import { useLocalStorage } from "@/lib/use-local-storage";
 import { z } from "zod";
+import { saveSurveyResults } from "@/lib/actions";
 
 const schema = z.object({
   step: z.number(),
@@ -64,6 +65,7 @@ export default function Home() {
 
   const handleWeekendSubmit = (weekend: WeekendFormSchema) => {
     setData({ ...data, weekend, step: data.step + 1 });
+    saveSurveyResults(data.intro!, data.working!, weekend);
     window.scrollTo(0, 0);
   };
 

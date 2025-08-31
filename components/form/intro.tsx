@@ -19,6 +19,7 @@ export const introFormSchema = z.object({
   gender: z.string().min(1, { message: "El género es requerido" }),
   age: z
     .number({ message: "La edad es requerida" })
+    .int({ message: "La edad debe ser un número entero" })
     .min(1, { message: "La edad debe ser entre 1 y 150" })
     .max(150, { message: "La edad debe ser entre 1 y 150" }),
 });
@@ -111,6 +112,7 @@ export function IntroForm({
               <FormControl>
                 <Input
                   type="number"
+                  step="1"
                   {...field}
                   onChange={(e) => {
                     const value =

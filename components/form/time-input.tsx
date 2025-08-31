@@ -18,10 +18,12 @@ interface TimeInputProps<T extends FieldValues> {
 export const timeSchema = z.object({
   hours: z
     .number({ message: "Ingresa una cantidad de horas" })
+    .int({ message: "Las horas debe ser un número entero" })
     .min(0, { message: "Las horas debe ser entre 0 y 24" })
     .max(24, { message: "Las horas debe ser entre 0 y 24" }),
   minutes: z
     .number({ message: "Ingresa una cantidad de minutos" })
+    .int({ message: "Las minutos debe ser un número entero" })
     .min(0, { message: "Las minutos debe ser entre 0 y 60" })
     .max(60, { message: "Las minutos debe ser entre 0 y 60" }),
 });
@@ -41,6 +43,7 @@ export function TimeInput<T extends FieldValues>({
             <FormControl>
               <Input
                 type="number"
+                step="1"
                 {...field}
                 onChange={(e) => {
                   const value =
@@ -64,6 +67,7 @@ export function TimeInput<T extends FieldValues>({
             <FormControl>
               <Input
                 type="number"
+                step="1"
                 {...field}
                 onChange={(e) => {
                   const value =
