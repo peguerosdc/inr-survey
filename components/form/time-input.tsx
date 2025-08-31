@@ -24,8 +24,8 @@ export const timeSchema = z.object({
   minutes: z
     .number({ message: "Ingresa una cantidad de minutos" })
     .int({ message: "Las minutos debe ser un número entero" })
-    .min(0, { message: "Las minutos debe ser entre 0 y 60" })
-    .max(60, { message: "Las minutos debe ser entre 0 y 60" }),
+    .min(0, { message: "Las minutos debe ser entre 0 y 59" })
+    .max(59, { message: "Las minutos debe ser entre 0 y 59" }),
 });
 
 export function TimeInput<T extends FieldValues>({
