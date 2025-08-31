@@ -1,5 +1,6 @@
 "use server";
 import nodemailer from "nodemailer";
+import { formatNumber } from "./results";
 
 export async function sendSurveyResultsEmail(email: string, total: number) {
   try {
@@ -13,17 +14,14 @@ export async function sendSurveyResultsEmail(email: string, total: number) {
         pass: process.env.GOOGLE_APP_PASSWORD,
       },
     });
+    const formattedTotal = formatNumber(total);
 
     const info = await transporter.sendMail({
       from: `"Encuesta INR" <${process.env.GOOGLE_EMAIL}>`,
       to: email,
       subject: "Resultados de tu Encuesta INR",
-      text: `El tiempo promedio al día en conductas sedentarias es: ${total.toFixed(
-        2
-      )} h/día`,
-      html: `El tiempo promedio al día en conductas sedentarias es: <b>${total.toFixed(
-        2
-      )} h/día</b>`,
+      text: `El tiempo promedio al día en conductas sedentarias es: ${formattedTotal} h/día`,
+      html: `El tiempo promedio al día en conductas sedentarias es: <b>${formattedTotal} h/día</b>`,
     });
     console.log(info);
 

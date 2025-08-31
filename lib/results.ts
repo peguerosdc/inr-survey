@@ -30,3 +30,7 @@ export function computeAverageHours(
   const total = (weekdays + weekends) / 420;
   return total;
 }
+
+export function formatNumber(number: number) {
+  return number.toFixed(0);
+}

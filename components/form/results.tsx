@@ -6,7 +6,7 @@ import { Loader } from "lucide-react";
 import { useState, useTransition } from "react";
 import { useLocalStorage } from "@/lib/use-local-storage";
 import { z } from "zod";
-import { computeAverageHours } from "@/lib/results";
+import { computeAverageHours, formatNumber } from "@/lib/results";
 
 interface FormResultsProps {
   email: string;
@@ -54,7 +54,7 @@ export function FormResults({
     <div className="container px-4 sm:max-w-3xl sm:mx-auto py-10 flex flex-col">
       <div className="flex flex-col gap-4 text-center">
         <p>El tiempo promedio al día en conductas sedentarias es:</p>
-        <p className="text-2xl font-bold">{total.toFixed(2)} h/día</p>
+        <p className="text-2xl font-bold">{formatNumber(total)} h/día</p>
         <p>
           Ubica en que nivel del semáforo mostrado en el cartel te encuentras
         </p>
