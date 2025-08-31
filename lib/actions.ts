@@ -7,6 +7,8 @@ import { IntroSchema } from "@/components/form/intro";
 import { WorkingFormSchema } from "@/components/form/working-form";
 import { WeekendFormSchema } from "@/components/form/weekend-form";
 
+const privacyPolicy = `Aviso de Privacidad: Conforme a lo establecido en la Ley General de Transparencia y Acceso a la Información Pública en su artículo 4° y la Ley Federal de Transparencia y Acceso a la Información Pública en su artículo 3°, este mensaje electrónico y cualquier archivo adjunto al mismo es considerado como información privilegiada y excepcionalmente podrá clasificarse como información confidencial y/o reservada. Este mensaje es para uso exclusivo del destinatario, por lo que su contenido no podrá divulgarse, distribuirse y/o difundirse por ningún medio sin la previa autorización del emisor. Si usted no es el destinatario a quien fue enviado, se le prohíbe: utilizar total o parcialmente el contenido, retransmitirlo, distribuirlo, copiarlo o realizar ningún acto con base en su contenido. Si ha recibido este correo electrónico por error, le agradecemos informar de inmediato al remitente mediante un correo de respuesta, y borrar este mensaje de forma permanente junto a cualquier copia digital o impresa, así como cualquier archivo adjunto al mismo.`;
+
 export async function sendSurveyResultsEmail(email: string, total: number) {
   try {
     const transporter = nodemailer.createTransport({
@@ -25,8 +27,8 @@ export async function sendSurveyResultsEmail(email: string, total: number) {
       from: `"Encuesta INR" <${process.env.GOOGLE_EMAIL}>`,
       to: email,
       subject: "Resultados de tu Encuesta INR",
-      text: `El tiempo promedio al día en conductas sedentarias es: ${formattedTotal} h/día`,
-      html: `El tiempo promedio al día en conductas sedentarias es: <b>${formattedTotal} h/día</b>`,
+      text: `El tiempo promedio al día en conductas sedentarias es: ${formattedTotal} h/día\n\n${privacyPolicy}`,
+      html: `El tiempo promedio al día en conductas sedentarias es: <b>${formattedTotal} h/día</b><br/><p style="color: #777777;">${privacyPolicy}</p>`,
     });
     console.log(info);
 
