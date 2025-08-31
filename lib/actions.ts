@@ -3,6 +3,7 @@ import nodemailer from "nodemailer";
 import { computeAverageHours, formatNumber } from "./results";
 import { db } from "./db/drizzle";
 import { results } from "./db/schema";
+import { sql } from "drizzle-orm";
 import { IntroSchema } from "@/components/form/intro";
 import { WorkingFormSchema } from "@/components/form/working-form";
 import { WeekendFormSchema } from "@/components/form/weekend-form";
@@ -65,6 +66,7 @@ export async function saveSurveyResults(
       eight_hours: weekend.eight.hours,
       eight_minutes: weekend.eight.minutes,
       average_hours: computeAverageHours(working, weekend),
+      createdAt: sql`now() AT TIME ZONE 'America/Mexico_City'`,
     });
     return { success: true };
   } catch (error) {

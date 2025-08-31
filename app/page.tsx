@@ -20,6 +20,7 @@ import { FormFooter } from "@/components/form/footer";
 import { useLocalStorage } from "@/lib/use-local-storage";
 import { z } from "zod";
 import { saveSurveyResults } from "@/lib/actions";
+import { fromZonedTime } from "date-fns-tz";
 
 const schema = z.object({
   step: z.number(),

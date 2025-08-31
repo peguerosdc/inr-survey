@@ -9,7 +9,7 @@ import {
 
 export const results = pgTable("results", {
   id: serial("id").primaryKey(),
-  createdAt: timestamp("fecha_creacion").defaultNow().notNull(),
+  createdAt: timestamp("fecha_creacion", { withTimezone: true }).notNull(),
   // intro
   gender: text("genero").notNull(),
   age: integer("edad").notNull(),
