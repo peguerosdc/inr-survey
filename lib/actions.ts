@@ -40,46 +40,62 @@ export async function sendSurveyResultsEmail(email: string, total: number) {
   }
 }
 
+async function performSave(
+  intro: IntroSchema,
+  working: WorkingFormSchema,
+  weekend: WeekendFormSchema
+) {
+  await db.insert(results).values({
+    gender: intro.gender,
+    age: intro.age,
+    one_hours: working.one.hours,
+    one_minutes: working.one.minutes,
+    two_hours: working.two.hours,
+    two_minutes: working.two.minutes,
+    three_hours: working.three.hours,
+    three_minutes: working.three.minutes,
+    four_hours: working.four.hours,
+    four_minutes: working.four.minutes,
+    five_hours: weekend.five.hours,
+    five_minutes: weekend.five.minutes,
+    six_hours: weekend.six.hours,
+    six_minutes: weekend.six.minutes,
+    seven_hours: weekend.seven.hours,
+    seven_minutes: weekend.seven.minutes,
+    eight_hours: weekend.eight.hours,
+    eight_minutes: weekend.eight.minutes,
+    average_hours: computeAverageHours(working, weekend),
+    createdAt: sql`now() AT TIME ZONE 'America/Mexico_City'`,
+  });
+}
+
 export async function saveSurveyResults(
   intro: IntroSchema,
   working: WorkingFormSchema,
   weekend: WeekendFormSchema
 ) {
   try {
-    await db.insert(results).values({
-      gender: intro.gender,
-      age: intro.age,
-      one_hours: working.one.hours,
-      one_minutes: working.one.minutes,
-      two_hours: working.two.hours,
-      two_minutes: working.two.minutes,
-      three_hours: working.three.hours,
-      three_minutes: working.three.minutes,
-      four_hours: working.four.hours,
-      four_minutes: working.four.minutes,
-      five_hours: weekend.five.hours,
-      five_minutes: weekend.five.minutes,
-      six_hours: weekend.six.hours,
-      six_minutes: weekend.six.minutes,
-      seven_hours: weekend.seven.hours,
-      seven_minutes: weekend.seven.minutes,
-      eight_hours: weekend.eight.hours,
-      eight_minutes: weekend.eight.minutes,
-      average_hours: computeAverageHours(working, weekend),
-      createdAt: sql`now() AT TIME ZONE 'America/Mexico_City'`,
-    });
+    await performSave(intro, working, weekend);
     return { success: true };
   } catch (error) {
-    console.error(
-      "saveSurveyResults! => ",
-      error,
-      "intro: ",
-      intro,
-      "working: ",
-      working,
-      "weekend: ",
-      weekend
-    );
-    return { success: false };
+    console.warn("saveSurveyResults first attempt failed => ", error);
+    // Retry once after 300ms
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 300));
+      await performSave(intro, working, weekend);
+      return { success: true };
+    } catch (retryError) {
+      console.error(
+        "saveSurveyResults retry failed => ",
+        retryError,
+        "intro: ",
+        intro,
+        "working: ",
+        working,
+        "weekend: ",
+        weekend
+      );
+      return { success: false };
+    }
   }
 }
